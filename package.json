@@ -1,0 +1,28 @@
+{
+  "name": "dev.d",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "A package to build a consistent and rich bash shell environment across windows, linux and macOS. Version 2+ represents a move away from a bash/python mix to a Node.js logical core.",
+  "main": "src/build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zentechinc/dev.d.git"
+  },
+  "author": "callMeIvan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zentechinc/dev.d/issues"
+  },
+  "homepage": "https://github.com/zentechinc/dev.d#readme",
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.21.5"
+  },
+  "dependencies": {
+    "lodash": "^4.17.20"
+  }
+}
