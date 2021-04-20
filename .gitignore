@@ -1,0 +1,17 @@
+# ignore files with potentially sensitive information
+build/*
+!build/README.md
+
+creds/*
+!creds/README.md
+
+config/*
+config/config.js
+!config/README.md
+
+#development resources
+.eslintrc.js
+.idea
+node_modules
+package-lock.json
+venv
