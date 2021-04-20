@@ -1,11 +1,8 @@
 import aliases from './aliases.js';
-import env_vars from './envTemplates/primary.js';
+import environmentals from './environmentals.js';
 import runtimeOptions from '../src/utils/runtimeOptions.js';
 
 const config_body = {
-    environmentals: {
-        common: {}
-    },
     paths_to_add: {
         prefix: [
             '$~~/os/win',
@@ -16,11 +13,11 @@ const config_body = {
     identity_keys: {
         clear: [],
         encrypted: [
-            '${DEVD}/creds/github/id_rsa',
-            '${DEVD}/creds/gitlab/id_rsa',
-            '${DEVD}/creds/bitbucket/id_rsa'
+            'C:\\zen_cloud\\cert\\bitbucket\\id_rsa',
+            'C:\\zen_cloud\\cert\\github\\id_rsa',
+            '/c/zen_cloud/cert/gitlab/id_rsa',
         ]
     }
 };
 
-export default {...config_body, aliases, env_vars, runtimeOptions};
+export default {...config_body, aliases, environmentals, runtimeOptions};
