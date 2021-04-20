@@ -7,9 +7,12 @@ agent_load_env() {
   test -f "$SSH_ENV" && . "$SSH_ENV" >|/dev/null
 }
 
-start_agent () {
-  (umask 077; ssh-agent >| "$SSH_ENV")
-  . "$SSH_ENV" >| /dev/null ;
+start_agent() {
+  (
+    umask 077
+    ssh-agent >|"$SSH_ENV"
+  )
+  . "$SSH_ENV" >|/dev/null
 }
 
 agent_load_external_keys() {
@@ -34,7 +37,7 @@ add_keys_crypto() {
   for key_in in "${keys_in[@]}"; do
     path_to_add=$(expand_string $key_in)
     if [[ $path_to_add != "empty" ]]; then
-      PROXY_RESPONSE=$(SSH_ASKPASS="${DEVD}/src/bash_utils/askpass-proxy.sh" ssh-add $path_to_add <<<"$id_rsa_decryption_key" 2>&1)
+      PROXY_RESPONSE=$(SSH_ASKPASS="${DEVD}/src/utils/dotShaw/askpass-proxy.sh" ssh-add $path_to_add <<<"$id_rsa_decryption_key" 2>&1)
       printf '\t%s\n' "$PROXY_RESPONSE"
     fi
   done

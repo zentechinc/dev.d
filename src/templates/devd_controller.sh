@@ -5,7 +5,7 @@ echo "sourcing ~~/devd_controller.sh"
 source "${DEVD}/src/utils/dotShaw/helper_functions.sh"
 source "${DEVD}/src/utils/dotShaw/ssh_init.sh"
 source "${DEVD}/build/.bash_aliases"
-source "${DEVD}/build/environment_variables"
+source "${DEVD}/build/environmentals.sh"
 
 function enrichPath() {
   if test -r "${DEVD}/build/path_prefixes.ldf"; then

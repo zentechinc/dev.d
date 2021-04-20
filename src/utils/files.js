@@ -40,15 +40,32 @@ function scanFileForLine(filePath, lineToScanFor) {
 }
 
 function buildLineDelimited(arrayOfLines) {
-    let lines = ''
+    let lines = '';
     for (const lineToAdd of arrayOfLines) {
-        lines = lines + lineToAdd + '\n'
+        lines = lines + lineToAdd + '\n';
     }
 
-    return lines
+    return lines;
 }
 
-function makeLineDelimitedFile(linesToRender, destinationPath , allowEmptyFiles = false){
+function makeEnvirontmentalsFile(destinationPath, environmentalLists) {
+    let fileBody = '';
+
+    for (const sublistName in environmentalLists){
+        const sublist = environmentalLists[sublistName]
+        if (Object.keys(sublist).length >= 1){
+            fileBody = fileBody + `# ${sublistName}\n`;
+            for (const environmentalName in sublist){
+                fileBody = fileBody + `export ${environmentalName}=${sublist[environmentalName]}` + '\n';
+            }
+            fileBody = fileBody + '\n';
+        }
+    }
+
+    makeFile(destinationPath, fileBody);
+}
+
+function makeLineDelimitedFile(destinationPath, linesToRender, allowEmptyFiles = false) {
     let lineBody;
     if (linesToRender.length > 0 || allowEmptyFiles) {
         lineBody = buildLineDelimited(linesToRender);
@@ -67,6 +84,7 @@ function makeFile(destinationPath, body, options = {inDevd: true}) {
 
 export default {
     buildLineDelimited,
+    makeEnvirontmentalsFile,
     makeFile,
     makeLineDelimitedFile,
     copyFile,

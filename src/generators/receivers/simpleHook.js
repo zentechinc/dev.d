@@ -9,7 +9,6 @@ function generateSimpleHook(fileNameNoExtension) {
 
     fileBody = fileBody + 'test -r ${DEVD}/build/devd_controller.sh && source ${DEVD}/build/devd_controller.sh';
 
-
     devdFiles.makeFile(`/build/${fileNameNoExtension}`, fileBody);
 }
 
