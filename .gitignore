@@ -6,7 +6,7 @@ creds/*
 !creds/README.md
 
 config/*
-config/config.js
+!config/config.js
 !config/README.md
 
 #development resources
