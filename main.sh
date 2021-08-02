@@ -13,4 +13,5 @@ done
 DEVD="$(cd -P "$(dirname "$script_source")" >/dev/null 2>&1 && pwd)"
 
 export DEVD
+echo "<------- marker 1 ------->"
 node "${DEVD}/src/build.js" $DEVD

@@ -35,6 +35,29 @@ function enrichPath() {
   fi
 }
 
+function planet() {
+  # get directory where command was called from
+  currentDir=$(pwd)
+
+  # for quality experience, allow custom name, must be FIRST POSITIONAL argument
+  fileName=$1
+
+  # remove output filename from incoming args to facilitate easy passing to binary
+  shift
+
+  # get the planet bin location
+  planet_exe=$(dirname "$(which "planet.exe")")
+
+  # move to the planet.exe bin dir
+  pushd "$planet_exe" >> /dev/null || exit
+
+  # run the command, but add in the called dir's path and custom filename
+  planet.exe "$@" -o "$currentDir/$fileName"
+
+  # go back to origin dir
+  pushd +1 >> /dev/null || exit
+}
+
 function promptCustom() {
   PS1='\[\033]0;$TITLEPREFIX:$PWD\007\]' # set window title
   PS1="$PS1"'\n'                         # new line

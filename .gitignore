@@ -7,6 +7,8 @@ creds/*
 
 config/*
 !config/config.js
+!config/aliases.js
+!config/environmentals.js
 !config/README.md
 
 #development resources

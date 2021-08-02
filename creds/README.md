@@ -4,6 +4,6 @@ To load any arbitrary SSH key, just add an entry into config.js
 
 However, the settings in '.gitignore' should prevent any files here from being uploaded.
 
-Add credential files and such here.
+Add credential files and such here if you're feeling adventurous.
 
-Otherwise, this directory will hold a simple file called 'ssh-init_fancy.env' which is used for controlling SSH agents.
+Otherwise, this directory will hold a simple file called 'ssh-init_fancy.env' which is used for controlling SSH agents and harmless to be shared if you do something crazy with your .gitignore.

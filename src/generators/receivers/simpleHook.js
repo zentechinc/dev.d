@@ -7,7 +7,7 @@ import string from '../../utils/string.js';
 function generateSimpleHook(fileNameNoExtension) {
     let fileBody = fileGenUtils.buildSourcingHeader(fileNameNoExtension);
 
-    fileBody = fileBody + 'test -r ${DEVD}/build/devd_controller.sh && source ${DEVD}/build/devd_controller.sh';
+    fileBody = fileBody + 'test -r ${DEVD}/build/devd.sh && source ${DEVD}/build/devd.sh';
 
     devdFiles.makeFile(`/build/${fileNameNoExtension}`, fileBody);
 }

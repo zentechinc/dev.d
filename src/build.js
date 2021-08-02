@@ -5,7 +5,7 @@ import generators from './generators/index.js';
 // This file is the main controller of the initialization process
 async function buildBashReceivers() {
     devdFiles.copyFile('/src/templates/.vimrc', '/build/.vimrc');
-    devdFiles.copyFile('/src/templates/devd_controller.sh', '/build/devd_controller.sh');
+    devdFiles.copyFile('/src/templates/devd_controller.sh', '/build/devd.sh');
 
     generators.bash_aliases.generate();
     generators.bash_login.generate();
