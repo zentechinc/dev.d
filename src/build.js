@@ -19,7 +19,6 @@ async function buildBashReceivers() {
     devdFiles.makeLineDelimitedFile('/build/path_suffixes.ldf', config.paths_to_add.suffix);
 
     await devdFiles.ensureStatements.ensureHooks();
-    await devdFiles.ensureStatements.ensureSourceDevd();
 }
 
 buildBashReceivers();

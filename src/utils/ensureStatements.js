@@ -27,7 +27,7 @@ async function ensureHooks() {
         const splitHook = fileToScan.split(':');
 
         // .vimrc uses a different pattern for sourcing external files
-        if( splitHook[0] === '${HOME}/.vimrc') {
+        if (splitHook[0] === '${HOME}/.vimrc') {
             splitHook[1] = `so ${splitHook[1]}`;
         } else {
             splitHook[1] = `test -r ${splitHook[1]} && source ${splitHook[1]}`;
@@ -36,14 +36,16 @@ async function ensureHooks() {
         splitHook[0] = splitHook[0].replace('${HOME}', config.runtimeOptions.userHome);
         splitHook[1] = splitHook[1].replace(/\${DEVD}/g, config.runtimeOptions.devdDir);
 
-        const fileHasLine = await files.scanFileForLine(splitHook[0], splitHook[1]);
+        const hook = [
+            '## begin dev.d generated ######################################################',
+            '## lines in this block can and will be erased and regenerated without notice',
+            'source ~/dev.d/main.sh',
+            splitHook[1],
+            '## end dev.d generated ########################################################'
+        ];
 
-        if (!fileHasLine) {
-            fs.appendFileSync(splitHook[0], '\n' + splitHook[1] + '\n');
-        }
+        await files.streamInsert(splitHook[0], hook.slice(0, 3), hook[0], hook[3]);
     }
-
-    return true;
 }
 
 export default {

@@ -39,6 +39,69 @@ function scanFileForLine(filePath, lineToScanFor) {
     });
 }
 
+async function streamInsert(destinationPath, newLines, interruptLine, resumeLine = true) {
+    return new Promise(async function (resolve, reject) {
+        let splicing = false;
+        let interruptFound = false;
+        let previousLine;
+
+        const input = readline.createInterface({
+            input: fs.createReadStream(destinationPath),
+            output: process.stdout,
+            terminal: false
+        });
+
+        const output = fs.createWriteStream(`${destinationPath}_tmp`, {
+            flags: 'w'
+        });
+
+        function writeLine(lineIn = '') {
+            output.write(`${lineIn}\n`);
+        }
+
+        input.on('line', (line) => {
+            let lineOut = line;
+            if (lineOut === interruptLine && interruptFound !== true) {
+                splicing = true;
+                interruptFound = true;
+
+                if (!['\n', '\r\n', ''].includes(previousLine)) {
+                    writeLine();
+                }
+
+                for (const newLine of newLines) {
+                    writeLine(newLine);
+                }
+            }
+
+            if (lineOut === resumeLine || (splicing === true && resumeLine === true)) {
+                splicing = false;
+            }
+
+            if (splicing === false) {
+                previousLine = lineOut;
+                writeLine(lineOut);
+            }
+        });
+
+        input.on('close', async () => {
+            if (interruptFound === false) {
+                for (const newLine of newLines) {
+                    writeLine(newLine);
+                }
+            }
+
+            input.close();
+            input.removeAllListeners();
+            output.close();
+            output.removeAllListeners();
+
+            fs.renameSync(`${destinationPath}_tmp`, `${destinationPath}`);
+            resolve();
+        });
+    });
+}
+
 function buildLineDelimited(arrayOfLines) {
     let lines = '';
     for (const lineToAdd of arrayOfLines) {
@@ -51,11 +114,11 @@ function buildLineDelimited(arrayOfLines) {
 function makeEnvirontmentalsFile(destinationPath, environmentalLists) {
     let fileBody = '';
 
-    for (const sublistName in environmentalLists){
-        const sublist = environmentalLists[sublistName]
-        if (Object.keys(sublist).length >= 1){
+    for (const sublistName in environmentalLists) {
+        const sublist = environmentalLists[sublistName];
+        if (Object.keys(sublist).length >= 1) {
             fileBody = fileBody + `# ${sublistName}\n`;
-            for (const environmentalName in sublist){
+            for (const environmentalName in sublist) {
                 fileBody = fileBody + `export ${environmentalName}=${sublist[environmentalName]}` + '\n';
             }
             fileBody = fileBody + '\n';
@@ -90,5 +153,6 @@ export default {
     copyFile,
     ensureStatements,
     joinPaths,
-    scanFileForLine
+    scanFileForLine,
+    streamInsert
 };
