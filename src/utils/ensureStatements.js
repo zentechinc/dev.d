@@ -44,7 +44,7 @@ async function ensureHooks() {
             '## end dev.d generated ########################################################'
         ];
 
-        await files.streamInsert(splitHook[0], hook.slice(0, 3), hook[0], hook[3]);
+        await files.streamInsert(splitHook[0], hook.slice(0, hook.length), hook[0], hook[4]);
     }
 }
 
