@@ -30,7 +30,7 @@ const aliases = {
     'gplt': 'npm run lint && npm run test && git push',
     'gpu': 'git push -u',
     'gt': 'gitag',
-    'll': 'ls -al', // inherit color and other options from 'alias ls'
+    'll': 'ls -ahl', // inherit color and other options from 'alias ls'
     'ls': 'ls -F --color=auto --show-control-chars', // enable consistent behavior with bash -il
     'hrep': 'history | grep',
     'napi': 'npm run api-test-local',
