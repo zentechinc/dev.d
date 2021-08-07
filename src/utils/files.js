@@ -96,6 +96,8 @@ async function streamInsert(destinationPath, newLines, interruptLine, resumeLine
             output.close();
             output.removeAllListeners();
 
+            // await new Promise(resolve => setTimeout(resolve, 50));
+
             fs.renameSync(`${destinationPath}_tmp`, `${destinationPath}`);
             resolve();
         });
