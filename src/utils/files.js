@@ -39,7 +39,7 @@ function scanFileForLine(filePath, lineToScanFor) {
     });
 }
 
-async function streamInsert(destinationPath, newLines, interruptLine, resumeLine = true) {
+export async function streamInsert(destinationPath, newLines, interruptLine = false, resumeLine = false) {
     return new Promise(async function (resolve, reject) {
         let splicing = false;
         let interruptFound = false;
@@ -55,16 +55,22 @@ async function streamInsert(destinationPath, newLines, interruptLine, resumeLine
             flags: 'w'
         });
 
+        console.log('<------- marker 999999999 ------->');
+        console.log(`-------> output: ${output}`);
+
         function writeLine(lineIn = '') {
+            console.log('<------- marker 4444 ------->');
+            console.log(`-------> lineIn: ${lineIn}`);
+
             output.write(`${lineIn}\n`);
         }
 
         input.on('line', (line) => {
-            let lineOut = line;
-            if (lineOut === interruptLine && interruptFound !== true) {
+            if (line === interruptLine && interruptFound !== true) {
                 splicing = true;
                 interruptFound = true;
 
+                // if the previous line isn't blank, insert a blank line
                 if (!['\n', '\r\n', ''].includes(previousLine)) {
                     writeLine();
                 }
@@ -74,13 +80,13 @@ async function streamInsert(destinationPath, newLines, interruptLine, resumeLine
                 }
             }
 
-            if (lineOut === resumeLine || (splicing === true && resumeLine === true)) {
+            if (line === resumeLine || (splicing === true && resumeLine === true)) {
                 splicing = false;
             }
 
             if (splicing === false) {
-                previousLine = lineOut;
-                writeLine(lineOut);
+                previousLine = line;
+                writeLine(line);
             }
         });
 

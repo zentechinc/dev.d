@@ -36,7 +36,7 @@ async function ensureHooks() {
         splitHook[0] = splitHook[0].replace('${HOME}', config.runtimeOptions.userHome);
         splitHook[1] = splitHook[1].replace(/\${DEVD}/g, config.runtimeOptions.devdDir);
 
-        const hook = [
+        const devdBlock = [
             '## begin dev.d generated ######################################################',
             '## lines in this block can and will be erased and regenerated without notice',
             'source ~/dev.d/main.sh',
@@ -44,8 +44,8 @@ async function ensureHooks() {
             '## end dev.d generated ########################################################'
         ];
 
-        // await files.streamInsert(splitHook[0], hook.slice(0, hook.length), hook[0], false);
-        await files.streamInsert(splitHook[0], hook.slice(0, hook.length - 1), hook[0], hook[4]);
+        // await files.streamInsert(splitHook[0], devdBlock.slice(0, devdBlock.length), devdBlock[0], false);
+        await files.streamInsert(splitHook[0], devdBlock.slice(0, devdBlock.length - 1), devdBlock[0], devdBlock[4]);
     }
 }
 

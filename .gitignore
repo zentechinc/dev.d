@@ -1,6 +1,6 @@
 # ignore files with potentially sensitive information
-build/*
-!build/README.md
+receivers/*
+!receivers/README.md
 
 creds/*
 !creds/README.md

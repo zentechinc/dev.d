@@ -4,12 +4,12 @@ echo "sourcing ~~/devd_controller.sh"
 # source file ordering here is very important
 source "${DEVD}/src/utils/dotShaw/helper_functions.sh"
 source "${DEVD}/src/utils/dotShaw/ssh_init.sh"
-source "${DEVD}/build/.bash_aliases"
-source "${DEVD}/build/environmentals.sh"
+source "${DEVD}/receivers/.bash_aliases"
+source "${DEVD}/receivers/environmentals.sh"
 
 function enrichPath() {
-  if test -r "${DEVD}/build/path_prefixes.ldf"; then
-    mapfile -t paths_in < <(cat ${DEVD}/build/path_prefixes.ldf)
+  if test -r "${DEVD}/receivers/path_prefixes.ldf"; then
+    mapfile -t paths_in < <(cat ${DEVD}/receivers/path_prefixes.ldf)
 
     for path_to_add in "${paths_in[@]}"; do
       path_to_add=$(expand_string $path_to_add)
@@ -21,8 +21,8 @@ function enrichPath() {
     printf '%s\n' 'Done adding path path_prefixes'
   fi
 
-  if test -r "${DEVD}/build/path_suffixes.ldf"; then
-    mapfile -t paths_in < <(cat ${DEVD}/build/path_suffixes.ldf)
+  if test -r "${DEVD}/receivers/path_suffixes.ldf"; then
+    mapfile -t paths_in < <(cat ${DEVD}/receivers/path_suffixes.ldf)
 
     for path_to_add in "${paths_in[@]}"; do
       path_to_add=$(expand_string $path_to_add)

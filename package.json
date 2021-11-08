@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/zentechinc/dev.d#readme",
   "devDependencies": {
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
     "eslint": "^7.13.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.21.5"

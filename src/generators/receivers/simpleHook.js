@@ -7,9 +7,9 @@ import string from '../../utils/string.js';
 function generateSimpleHook(fileNameNoExtension) {
     let fileBody = fileGenUtils.buildSourcingHeader(fileNameNoExtension);
 
-    fileBody = fileBody + 'test -r ${DEVD}/build/devd.sh && source ${DEVD}/build/devd.sh';
+    fileBody = fileBody + 'test -r ${DEVD}/receivers/devd.sh && source ${DEVD}/receivers/devd.sh';
 
-    devdFiles.makeFile(`/build/${fileNameNoExtension}`, fileBody);
+    devdFiles.makeFile(`/receivers/${fileNameNoExtension}`, fileBody);
 }
 
 function buildAliasFromString(aliasKeyword, stringToAlias, options = {addNewline: true}) {

@@ -10,7 +10,7 @@ function generateBashAliases(){
         fileBody = fileBody + buildAliasFromString(aliasWord, aliasString)
     }
 
-    devdFiles.makeFile('/build/.bash_aliases', fileBody)
+    devdFiles.makeFile('/receivers/.bash_aliases', fileBody)
 }
 
 function buildAliasFromString(aliasKeyword, stringToAlias, options = {addNewline: true}) {

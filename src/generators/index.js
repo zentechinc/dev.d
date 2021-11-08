@@ -9,6 +9,6 @@ export default {
     bash_logout,
     bash_profile: {generate: (fileNameNoExtension = '.bash_profile') => simpleHook.generate(fileNameNoExtension)},
     bashrc: {generate: (fileNameNoExtension = '.bashrc') => simpleHook.generate(fileNameNoExtension)},
-    environmentals: {generate: (listOfLists) => files.makeEnvirontmentalsFile('/build/environmentals.sh', listOfLists)},
+    environmentals: {generate: (listOfLists) => files.makeEnvirontmentalsFile('/receivers/environmentals.sh', listOfLists)},
     profile: {generate: (fileNameNoExtension = '.profile') => simpleHook.generate(fileNameNoExtension)}
 }

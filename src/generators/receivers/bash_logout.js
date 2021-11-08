@@ -7,7 +7,7 @@ import string from '../../utils/string.js';
 function generateBashLogout(){
     let fileBody = fileGenUtils.buildSourcingHeader('.bash_logout')
 
-    devdFiles.makeFile('/build/.bash_aliases', fileBody)
+    devdFiles.makeFile('/receivers/.bash_aliases', fileBody)
 }
 
 export default {

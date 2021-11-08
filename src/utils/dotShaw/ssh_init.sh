@@ -33,7 +33,7 @@ add_keys_crypto() {
   read -sp 'Please enter the decryption Key: ' id_rsa_decryption_key
   printf '\n' # forces a new line after the read command
 
-  mapfile -t keys_in < <(cat ${DEVD}/build/crypto_keys.ldf)
+  mapfile -t keys_in < <(cat ${DEVD}/receivers/crypto_keys.ldf)
   for key_in in "${keys_in[@]}"; do
     path_to_add=$(expand_string $key_in)
     if [[ $path_to_add != "empty" ]]; then
