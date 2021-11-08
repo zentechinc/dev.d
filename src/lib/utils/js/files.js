@@ -1,7 +1,7 @@
 import fs from 'fs';
 import readline from 'readline';
 import path from 'path';
-import config from '../../config/config.js';
+import config from '../../../../config/config.js';
 import ensureStatements from './ensureStatements.js';
 import _ from 'lodash';
 

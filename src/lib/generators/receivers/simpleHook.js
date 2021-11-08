@@ -1,13 +1,13 @@
 import _ from 'lodash';
-import fileGenUtils from '../../utils/fileGen.js';
-import config from '../../../config/config.js';
-import devdFiles from '../../utils/files.js';
-import string from '../../utils/string.js';
+import fileGenUtils from '../../utils/js/fileGen.js';
+import config from '../../../../config/config.js';
+import devdFiles from '../../utils/js/files.js';
+import string from '../../utils/js/string.js';
 
 function generateSimpleHook(fileNameNoExtension) {
     let fileBody = fileGenUtils.buildSourcingHeader(fileNameNoExtension);
 
-    fileBody = fileBody + 'test -r ${DEVD}/receivers/devd.sh && source ${DEVD}/receivers/devd.sh';
+    fileBody = fileBody + 'test -r ${DEVD}/receivers/devd_controller.sh && source ${DEVD}/receivers/devd_controller.sh';
 
     devdFiles.makeFile(`/receivers/${fileNameNoExtension}`, fileBody);
 }

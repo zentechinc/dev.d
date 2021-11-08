@@ -1,6 +1,6 @@
-import hooksToPlace from '../consts/hooksToPlace.js';
-import files from '../utils/files.js';
-import config from '../../config/config.js';
+import hooksToPlace from '../../consts/hooksToPlace.js';
+import files from './files.js';
+import config from '../../../../config/config.js';
 import fs from 'fs';
 
 async function ensureSourceDevd() {

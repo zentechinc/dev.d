@@ -1,7 +1,7 @@
 import bash_aliases from './receivers/bash_aliases.js';
 import bash_logout from './receivers/bash_logout.js';
 import simpleHook from './receivers/simpleHook.js';
-import files from '../utils/files.js'
+import files from '../utils/js/files.js'
 
 export default {
     bash_aliases,

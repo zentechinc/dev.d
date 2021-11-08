@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import config from '../../config/aliases.js';
+import config from '../../../../config/aliases.js';
 import _ from 'lodash';
 
 function sanitizeForBash(stringIn, options = {errorOnUnclean: false}) {

@@ -1,6 +1,6 @@
 import aliases from './aliases.js';
 import environmentals from './environmentals.js';
-import runtimeOptions from '../src/utils/runtimeOptions.js';
+import runtimeOptions from '../src/lib/utils/js/runtimeOptions.js';
 
 const config_body = {
     paths_to_add: {

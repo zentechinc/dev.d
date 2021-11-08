@@ -1,4 +1,4 @@
-import * as filesProxies from './files';
+import * as filesProxies from './files.js';
 import {Readable, PassThrough, Writable} from 'stream';
 import fs from 'fs';
 

@@ -74,7 +74,7 @@ Our goal here is to have a repo that can be checked out from Git, have the init_
 
 We will achieve this reliable and rich runtimeOptions by adding HOOKS into the standard system files that then reference our dev.d runtimeOptions. 
 
-![Bash Init Path](src/assets/init%20paths.png)
+![Bash Init Path](src/lib/assets/init%20paths.png)
 
 ## Uniformity in experience
 We want to create as uniform an experience as possible between the various applications we are going to interact with
@@ -108,7 +108,7 @@ However, with the idiom presented below, we will attempt to bring things into al
     - using multiple bindings to the same effect creates confusion as to whether the two commands are actually the same or slightly different, as illustrated in the Google Chrome example below
         - it obligates you to have similar elevations for related commands
         - the [ ctrl + shift + r ] here is crazy, and likely included simply to create a parallel with the [ shift + f5 ]
-        ![Chrome Reloads](src/assets/chrome%20refresh%20shortcuts.png) 
+        ![Chrome Reloads](src/lib/assets/chrome%20refresh%20shortcuts.png) 
 
 - Key classes are to be referred to with parenthesis
     - (move) - any movement key
@@ -131,17 +131,17 @@ However, with the idiom presented below, we will attempt to bring things into al
 
 - 'Sub-key' commands are invoked as secondary functions on another key
     - Sub-key commands are usually indicated with alternate text or font coloring
-        - [On this board, sub-keys are indicated in blue](src/assets/sub-key in alternate colors.jpg)
+        - [On this board, sub-keys are indicated in blue](src/lib/assets/sub-key in alternate colors.jpg)
             - Notice the typical 'shift-able' (commands invoked with [shift] + [a base key]) commands are still white and presented above their plain base-key    
     - Sometimes the sub-key command is NOT well illustrated or indicated (Mac-likes)
-        - [Page-Up and Page-Down on Mac-like](src/assets/sub-key page-up on mac.jpg)
+        - [Page-Up and Page-Down on Mac-like](src/lib/assets/sub-key page-up on mac.jpg)
 
 - 'Meta-keys' are base keys with abstract commands
     - [page-up], [page-up], [home], [end]
     - Meta-keys are AWESOME and CRUCIAL to this paradigm
     - Unfortunately Meta-keys are less common on small notebooks or small keyboards
         - Meta-keys may sometimes be invoked as sub-key commands on smaller boards with an additional modifier stroke, usually [fn]
-            - [Page-Up and Page-Down on Mac-like](src/assets/sub-key page-up on mac.jpg)
+            - [Page-Up and Page-Down on Mac-like](src/lib/assets/sub-key page-up on mac.jpg)
         - [fn] support to invoke sub-key commands is inconsistent and imperfect in implementation, ESPECIALLY when used with other modifiers
             - We can't support such inconsistencies in this paradigm and so expect the user to get a big-boy keyboard accessory
                 - There is a trend towards keyboards with about 87-keys (called 87key here-after) that strike a nice balance between minimalism and high-functionality

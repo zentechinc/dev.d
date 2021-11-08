@@ -1,11 +1,11 @@
 import config from '../config/config.js';
-import devdFiles from './utils/files.js';
-import generators from './generators/index.js';
+import devdFiles from './lib/utils/js/files.js';
+import generators from './lib/generators/index.js';
 
-// This file is the main controller of the initialization process
+// This file is the main controller for initialization a devd environment
 async function buildBashReceivers() {
-    devdFiles.copyFile('/src/templates/.vimrc', '/receivers/.vimrc');
-    devdFiles.copyFile('/src/templates/devd_controller.sh', '/receivers/devd_controller.sh');
+    devdFiles.copyFile('/src/lib/templates/.vimrc', '/receivers/.vimrc');
+    devdFiles.copyFile('/src/lib/templates/devd_controller.sh', '/receivers/devd_controller.sh');
 
     generators.bash_aliases.generate();
     generators.bash_login.generate();

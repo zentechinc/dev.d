@@ -2,8 +2,8 @@
 echo "sourcing ~~/devd_controller.sh"
 
 # source file ordering here is very important
-source "${DEVD}/src/utils/dotShaw/helper_functions.sh"
-source "${DEVD}/src/utils/dotShaw/ssh_init.sh"
+source "${DEVD}/src/lib/utils/bash/helper_functions.sh"
+source "${DEVD}/src/lib/utils/bash/ssh_init.sh"
 source "${DEVD}/receivers/.bash_aliases"
 source "${DEVD}/receivers/environmentals.sh"
 
