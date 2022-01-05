@@ -39,6 +39,17 @@ function scanFileForLine(filePath, lineToScanFor) {
     });
 }
 
+/**
+ * streamInsert
+ *
+ * for both interruptLine and resumeLine, the line value found will be discarded and replaced
+ *
+ * @param destinationPath - a string containing the path to file into which the lines should be inserted
+ * @param newLines - an array of values representing the lines to be inserted into the file
+ * @param interruptLine - a value representing the line at which point insertion should begin; if false or this line is not found then the lines are appended at the end
+ * @param resumeLine - a value representing the line to end the insert block; if false, streamInsert will only insert lines into the file without truncating; if truthy, any data between the start of the insert and the detection of the resumeLine will be truncated
+ * @returns {Promise<unknown>}
+ */
 export async function streamInsert(destinationPath, newLines, interruptLine = false, resumeLine = false) {
     return new Promise(async function (resolve, reject) {
         let splicing = false;
@@ -55,46 +66,46 @@ export async function streamInsert(destinationPath, newLines, interruptLine = fa
             flags: 'w'
         });
 
-        console.log('<------- marker 999999999 ------->');
-        console.log(`-------> output: ${output}`);
-
         function writeLine(lineIn = '') {
-            console.log('<------- marker 4444 ------->');
-            console.log(`-------> lineIn: ${lineIn}`);
-
             output.write(`${lineIn}\n`);
         }
 
+        function insertLines(newLines) {
+            for (const newLine of newLines) {
+                writeLine(newLine);
+            }
+        }
+
         input.on('line', (line) => {
+            // if we find the interrupt line, we want to begin inserting new lines...
+            // but only want to do this once in a given file, hence the interruptFound check
             if (line === interruptLine && interruptFound !== true) {
                 splicing = true;
                 interruptFound = true;
 
-                // if the previous line isn't blank, insert a blank line
-                if (!['\n', '\r\n', ''].includes(previousLine)) {
-                    writeLine();
-                }
-
-                for (const newLine of newLines) {
-                    writeLine(newLine);
-                }
+                insertLines(newLines);
             }
 
-            if (line === resumeLine || (splicing === true && resumeLine === true)) {
+            // if we find a resume line, we want to re-enable writing of original file content...
+            // but if the resumeLine value is false, we want to re-enable original content insertion
+            if (line === resumeLine || (splicing === true && resumeLine === false)) {
                 splicing = false;
             }
 
             if (splicing === false) {
+
                 previousLine = line;
-                writeLine(line);
+
+                if (line !== resumeLine) {
+                    writeLine(line);
+                }
             }
         });
 
         input.on('close', async () => {
+            // if the interrupt is never found, we want to at least get the lines in at the end
             if (interruptFound === false) {
-                for (const newLine of newLines) {
-                    writeLine(newLine);
-                }
+                insertLines(newLines);
             }
 
             input.close();
@@ -103,7 +114,6 @@ export async function streamInsert(destinationPath, newLines, interruptLine = fa
             output.removeAllListeners();
 
             // await new Promise(resolve => setTimeout(resolve, 50));
-
             fs.renameSync(`${destinationPath}_tmp`, `${destinationPath}`);
             resolve();
         });

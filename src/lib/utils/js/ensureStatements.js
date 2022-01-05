@@ -38,14 +38,14 @@ async function ensureHooks() {
 
         const devdBlock = [
             '## begin dev.d generated ######################################################',
-            '## lines in this block can and will be erased and regenerated without notice',
+            '## lines in this block can and will be erased or changed without notice',
             'source ~/dev.d/main.sh',
             splitHook[1],
+            '# gold',
             '## end dev.d generated ########################################################'
         ];
 
-        // await files.streamInsert(splitHook[0], devdBlock.slice(0, devdBlock.length), devdBlock[0], false);
-        await files.streamInsert(splitHook[0], devdBlock.slice(0, devdBlock.length - 1), devdBlock[0], devdBlock[4]);
+        await files.streamInsert(splitHook[0], devdBlock, devdBlock[0], devdBlock[devdBlock.length - 1]);
     }
 }
 
